@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<div>
+    <table>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="firstName" placeholder="First Name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="lastName" placeholder="Last Name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="emailId" placeholder="Email Id">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="mobileNo" placeholder="10 digit mobile number">
+            </td>
+        </tr>
+        <!-- Gender Details -->
+        <tr>
+            <td>Select Gender</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="radio" name="genderRadio" value="Male" [(ngModel)]="gender">Male
+            </td>
+            <td>
+                <input type="radio" name="genderRadio" value="Female" [(ngModel)]="gender">Female
+            </td>
+        </tr>
+        <tr>
+            <td>Existing Loan Details</td>
+            <td>
+                <input type="checkbox" value="HouseBuilding" [(ngModel)]="houseLoan">House building
+                <input type="checkbox" value="Car" [(ngModel)]="carLoan">Car
+                <input type="checkbox" value="Personal" [(ngModel)]="personalLoan">Personal
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea placeholder="Enter description" [(ngModel)]="description" rows="4"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Select your car</td>
+            <td>
+                <select [(ngModel)]="currentCar">
+                    <option *ngFor="let car of carList" [value]="car.id">{{car.name}}</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button (click)="clickButton()">Click Me</button>
+</div>
+
+<!-- Summary Details Below -->
+
+<div *ngIf=outputObj>
+    <h1>--------- All summary below ---------- </h1>
+    <table>
+        <tr>
+            <td>{{outputObj.firstName}} {{outputObj.lastName}}</td>
+        </tr>
+        <tr>
+            <td>Mobile No : {{outputObj.mobileNo}}</td>
+        </tr>
+        <tr>
+            <td>Email Id : {{outputObj.emailId}}</td>
+        </tr>
+        <tr>
+            <td>Gender : {{outputObj.gender}}</td>
+        </tr>
+        <tr>
+            <td>Description goes here : {{outputObj.description}}</td>
+        </tr>
+        <!-- <tr>
+            <td *ngIf="houseLoan">You have House Building Loan</td>
+            <td *ngIf="carLoan">You have car Loan</td>
+            <td *ngIf="personalLoan">You have personal Loan</td>
+        </tr> -->
+        <!-- Check why below is not working -->
+        <tr>
+            <td *ngIf=outputObj.houseLoan>You have House Building Loan</td>
+            <td *ngIf=outputObj.carLoan> | You have Car Loan</td>
+            <td *ngIf=outputObj.personalLoan> | You have personal Loan</td>
+        </tr>
+        <tr>
+            <td>
+                You have {{outputObj.selectedCar}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div *ngIf=outputObj>
+    <!-- Here Response on button click : {{result}} -->
+    <h1>Display from object </h1>
+    Your First Name : {{outputObj.firstName}}
+    <p>
+        Your Last Name : {{outputObj.lastName}}
+    </p>
+
+    <br />
+    All result in json
+    <pre>{{outputObj | json}}</pre>
+
+</div>
+
+<div *ngIf=jsonObjToDisplay>
+    <h1>Actual Json Parsing</h1>
+    {{jsonObjToDisplay.firstName}}
+    <!-- <span *ngFor="let data of jsonAsData;">
+        {{data.firstName}}
+    </span> -->
+</div>
